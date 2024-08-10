@@ -12,7 +12,7 @@ router.post('/register', async (req, res) => {
         const { email, password, username } = req.body;
         const user = new User({ email, password, username });
         await user.save();
-        res.status(201).send({ message: 'User registered successfully' });
+        res.status(201).send({ message: 'User registered successfully', user });
     } catch (error) {
         console.error('Error registering user:', error);
         res.status(500).send({ message: 'Registration failed' });
@@ -63,7 +63,7 @@ router.post('/logout', (req, res) => {
 router.get('/users', async (req, res) => {
     try {
         const users = await User.find({}, 'id email role');
-        res.status(200).send(users);
+        res.status(200).send({message: "Users found successfully", users});
     } catch (error) {
         console.error('Error fetching users:', error);
         res.status(500).send({ message: 'Failed to fetch users' });
