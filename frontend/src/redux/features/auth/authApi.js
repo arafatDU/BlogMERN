@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://blog-mern-api-three.vercel.app/api/auth",
+    baseUrl: "https://blog-mern-api-ten.vercel.app/api/auth",
     credentials: 'include',
     
   }),
