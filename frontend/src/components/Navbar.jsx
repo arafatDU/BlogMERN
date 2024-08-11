@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import { NavLink } from 'react-router-dom'
 import { IoMenuSharp, IoClose } from "react-icons/io5";
+import { useSelector, useDispatch } from 'react-redux';
+import avatarImg from '../assets/commentor.png';
 
 
 const navLists = [
@@ -12,7 +14,8 @@ const navLists = [
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const {user} = useSelector(state => state.auth);
+  console.log(user);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
@@ -32,9 +35,20 @@ function Navbar() {
               </NavLink>
             </li>
           ))}
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
+
+          {/* Render btn based on user login status */}
+
+          {
+            user && user.role === 'admin' ? (
+              <li>
+                <img src={avatarImg} alt="" className='size-8' />
+              </li>
+            ) : (
+              <li>
+              <NavLink to="/login">Login</NavLink>
+            </li>
+            )
+          }
         </ul>
 
         { /* Mobile menu */ }
