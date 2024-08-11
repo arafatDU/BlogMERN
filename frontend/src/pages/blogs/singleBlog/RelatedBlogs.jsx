@@ -1,10 +1,10 @@
 import React from 'react'
 import {Link, useParams} from 'react-router-dom'
-import { useFetchBlogByIdQuery } from '../../../redux/features/blogs/blogApi'
+import { useFetchRelatedBlogsQuery } from '../../../redux/features/blogs/blogApi'
 
 function RelatedBlogs() {
   const {id} = useParams();
-  const {data: blogs = [], error, isLoading} = useFetchBlogByIdQuery(id);
+  const {data: blogs = [], error, isLoading} = useFetchRelatedBlogsQuery(id);
   return (
     <div>
       <h3 className='text-2xl font-medium pt-8 px-8 pb-5'>Related Blogs</h3>
