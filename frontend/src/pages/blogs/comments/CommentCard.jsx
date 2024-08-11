@@ -4,6 +4,8 @@ import { formatDate } from '../../../utils/formateDate'
 import PostComment from './PostComment'
 
 function CommentCard({comments}) {
+
+
   return (
     <div className='my-6 bg-whie p-8'>
       <div>
@@ -13,8 +15,8 @@ function CommentCard({comments}) {
             <div>
               {
                 comments.map((comment, index) => (
-                  <div key={index} className='my-4'>
-                    <div className='flex items-center'>
+                  <div key={index} className='mt-4'>
+                    <div className='flex gap-4 items-center'>
                       <div>
                         <img src={commentorIcon} alt="commentor" className='h-14' />
                         <div>

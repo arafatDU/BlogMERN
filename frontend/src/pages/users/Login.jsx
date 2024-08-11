@@ -1,12 +1,15 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useLoginUserMutation } from '../../redux/features/auth/authApi'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../../redux/features/auth/authSlice'
 
 function Login() {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [message, setMessage] = React.useState('')
   const [loginUser, {isLoading: loginLoading}] = useLoginUserMutation();
+  const dispatch = useDispatch();
   
 
   const navigate = useNavigate();
@@ -17,6 +20,8 @@ function Login() {
       const response = await loginUser(data).unwrap();
       console.log(response);
       const {token, user} = response;
+      //console.log(token, user);
+      dispatch(setUser({token, user}));
       alert("Login successful");
       navigate('/');
     } catch (error) {

@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { IoMenuSharp, IoClose } from "react-icons/io5";
 import { useSelector, useDispatch } from 'react-redux';
 import avatarImg from '../assets/commentor.png';
+import { useLogoutUserMutation } from '../redux/features/auth/authApi';
+import { logout } from '../redux/features/auth/authSlice';
 
 
 const navLists = [
@@ -17,6 +19,18 @@ function Navbar() {
   const {user} = useSelector(state => state.auth);
   console.log(user);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const dispatch = useDispatch();
+  const [logoutUser] = useLogoutUserMutation();
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser().unwrap();
+      dispatch(logout());
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <header className='bg-white py-6 border'>
@@ -37,17 +51,33 @@ function Navbar() {
           ))}
 
           {/* Render btn based on user login status */}
-
           {
-            user && user.role === 'admin' ? (
-              <li>
+            user && user.role === 'user' ? (
+              <li className='flex items-center gap-3'>
                 <img src={avatarImg} alt="" className='size-8' />
+                <Link to="/login">
+                  <button 
+                  onClick={handleLogout} 
+                  className='bg-[#1E73BE] px-4 py-1.5 text-white rounded-sm'>Logout</button>
+                </Link>
               </li>
             ) : (
               <li>
               <NavLink to="/login">Login</NavLink>
             </li>
             )
+          }
+
+
+          {
+            user && user.role === 'admin' && (
+              <li className='flex items-center gap-3'>
+                <img src={avatarImg} alt="" className='size-8' />
+                <Link to="/dashboard">
+                  <button className='bg-[#1E73BE] px-4 py-1.5 text-white rounded-sm'>Dashboard</button>
+                </Link>
+              </li>
+            ) 
           }
         </ul>
 

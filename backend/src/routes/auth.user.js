@@ -36,9 +36,11 @@ router.post('/login', async (req, res) => {
 
         
         const token = await generateToken(user._id); // Generate token with user ID
-        res.cookie('token', token, { httpOnly: true,
+        res.cookie('token', token, { 
+            httpOnly: true,
             secure: true, // Ensure this is true for HTTPS
-            sameSite: 'None'});
+            sameSite: true
+        });
         res.status(200).send({ message: 'Logged in successfully', token, user: {
             _id: user._id,
             email: user.email,
@@ -63,7 +65,7 @@ router.post('/logout', (req, res) => {
 router.get('/users', async (req, res) => {
     try {
         const users = await User.find({}, 'id email role');
-        res.status(200).send({message: "Users found successfully", users});
+        res.status(200).send(users);
     } catch (error) {
         console.error('Error fetching users:', error);
         res.status(500).send({ message: 'Failed to fetch users' });
