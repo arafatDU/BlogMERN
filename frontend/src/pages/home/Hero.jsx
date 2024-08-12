@@ -17,7 +17,7 @@ function Hero() {
   return (
     <div className='flex flex-col md:flex-row justify-between items-center md:gap-14 gap-8'>
       <div className='md:w-1/2 w-full text-center'>
-        <h1 className='md:text-5xl text-3xl font-bold md:leading-tight'>Blog NEXT JS 15</h1>
+        <h1 className='md:text-5xl text-3xl font-bold md:leading-tight'>Blog Web Application using MERN</h1>
         <p className='py-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore sed hic pariatur quae! Corporis eum, quo blanditiis quaerat sapiente possimus.</p>
       </div>
       <div className='md:w-1/2 w-full mx-auto'>
