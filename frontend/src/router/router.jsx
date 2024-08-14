@@ -11,6 +11,8 @@ import Dashboard from "../pages/admin/dashboard/Dashboard";
 import AddPost from "../pages/admin/post/AddPost";
 import ManagePost from "../pages/admin/post/ManagePost";
 import ManageUser from "../pages/admin/user/ManageUser";
+import AdminLayout from "../pages/admin/AdminLayout";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
   {
@@ -47,7 +49,7 @@ const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <Dashboard />,  // It will be protected route
+        element: <PrivateRouter> <AdminLayout /> </PrivateRouter>,  // It will be protected route
         children: [
           {
             path: '',

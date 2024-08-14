@@ -29,8 +29,8 @@ export const blogApi = createApi({
     }),
     updateBlog: builder.mutation({
       query: ({id, ...rest}) => ({
-        url: `/blogs/update-post${id}`,
-        method: 'PUT',
+        url: `/blogs/update-post/${id}`,
+        method: 'PATCH',
         body: rest,
         credentials: 'include',
       }),
